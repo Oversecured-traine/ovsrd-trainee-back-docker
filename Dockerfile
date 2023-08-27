@@ -1,7 +1,13 @@
-FROM node:18
+FROM node:14
 
 WORKDIR /app
 
-COPY build/ ./
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
 
 CMD ["node", "src/index.js"]
