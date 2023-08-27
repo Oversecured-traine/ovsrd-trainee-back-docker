@@ -7,11 +7,10 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - export ECR_LOGIN=$(aws ecr get-login-password --region $AWS_DEFAULT_REGION)
+      - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 666398651410.dkr.ecr.eu-west-1.amazonaws.com
   build:
     commands:
       - echo Building project...
-      - echo $ECR_LOGIN | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
       - npm install
       - npm run lint
       - npm run build
