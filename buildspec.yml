@@ -13,7 +13,6 @@ phases:
       - echo Building project...
       - npm install
       - npm run lint
-      - npm run build
       - echo Building Docker image...
       - docker build -t $REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION .
   post_build:
