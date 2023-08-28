@@ -1,9 +1,9 @@
 version: 0.2
+
+phases:
   build:
     commands:
       - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 666398651410.dkr.ecr.eu-west-1.amazonaws.com/ecrtest
       - docker build -t test:test1 .
       - docker tag test:test1 666398651410.dkr.ecr.eu-west-1.amazonaws.com/ecrtest:test1
-  post_build:
-    commands:
       - docker push 666398651410.dkr.ecr.eu-west-1.amazonaws.com/ecrtest:test1
