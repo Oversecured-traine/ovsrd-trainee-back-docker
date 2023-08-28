@@ -8,8 +8,9 @@ phases:
   build:
     commands:
       - echo Building Docker image...
+      - sudo service docker start
       - docker build -t $REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION .
-      - docker tag $REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION $REPOSITORY_URI:latest # Тег "latest"
+      - docker tag $REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION $REPOSITORY_URI:latest
   post_build:
     commands:
       - echo Pushing Docker images to Amazon ECR...
