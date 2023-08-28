@@ -7,7 +7,7 @@ phases:
   build:
     commands:
       - docker build -t test:test1 .
-      - docker tag test:test1 666398651410.dkr.ecr.eu-west-1.amazonaws.com/my-ecr-repo:test1
+      - docker tag test:test1 666398651410.dkr.ecr.eu-west-1.amazonaws.com/ecrtest:test1
   post_build:
     commands:
-      - docker push 666398651410.dkr.ecr.eu-west-1.amazonaws.com/my-ecr-repo:test1
+      - docker push 666398651410.dkr.ecr.eu-west-1.amazonaws.com/ecrtest:test1
