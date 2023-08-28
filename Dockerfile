@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM 666398651410.dkr.ecr.eu-west-1.amazonaws.com/ecrsource:latest
 
 WORKDIR /app
 
