@@ -5,4 +5,5 @@ const router = express.Router();
 
 router.post('/upload', uploadController.uploadImage);
 
+
 module.exports = router;
