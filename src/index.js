@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
-const uploadRoutes = require('./routes/uploadRoutes');
+const getUrlRoutes = require('./routes/getUrlRoutes');
 const rootRoutes = require('./routes/rootRoutes');
 
 app.use(express.json());
-app.use(uploadRoutes);
+app.use(getUrlRoutes);
 app.use(rootRoutes);
 
 const PORT = process.env.PORT || 3000;
