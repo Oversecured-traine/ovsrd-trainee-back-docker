@@ -6,8 +6,8 @@ const uploadImageURL = require('../controllers/uploadImageURL');
 const router = express.Router();
 
 router.get('/', rootController.root);
-router.post('/get-image-url', getImageURL.getSignedUrl);
-router.post('/get-upload-image-url', uploadImageURL.getUploadImageURL);
+router.get('/get-image-url', getImageURL.getSignedUrl);
+router.get('/get-upload-image-url', uploadImageURL.getUploadImageURL);
 
 
 module.exports = router;
