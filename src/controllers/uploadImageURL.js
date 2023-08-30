@@ -1,24 +1,26 @@
-const AWS = require('aws-sdk');
+const s3 = require('../common/S3');
 
-const s3 = new AWS.S3();
+exports.getUploadImageURL = async (req, res) => {
 
-exports.getSignedUrl = async (req, res) => {
     try {
         const cardID = req.body.cardID;
         const fileName = req.body.fileName;
+        const fileType = req.body.fileType;
 
         const params = {
-            Bucket: process.env.BUCKET_NAME,
+            Bucket: process.env.BUCKET_NAME || 'bucketdockerkryvoboktest',
             Key: `cards/${cardID}/${fileName}`,
             Expires: 3600,
-            ACL: 'public-read',
+            ContentType: fileType,
         };
 
-        const signedUrl = await s3.getSignedUrl('getObject', params);
+        const signedUrl = await s3.getSignedUrl('putObject', params);
 
         res.json({ signedUrl });
-    } catch (error) {
+    }
+    catch(error) {
         console.error('Error uploading file:', error);
         res.status(500).json({ error: 'Error uploading file' });
     }
+
 };

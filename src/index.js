@@ -1,11 +1,9 @@
 const express = require('express');
 const app = express();
-const getUrlRoutes = require('./routes/getUrlRoutes');
-const rootRoutes = require('./routes/rootRoutes');
+const routes = require('./routes/routes');
 
 app.use(express.json());
-app.use(getUrlRoutes);
-app.use(rootRoutes);
+app.use(routes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
