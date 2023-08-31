@@ -11,7 +11,9 @@ exports.getSignedUrl = async (req, res) => {
         const params = {
             Bucket: process.env.BUCKET_NAME || 'bucketdockerkryvoboktest',
             Key: `cards/test/${cardID}/`,
-            Expires: 60 * 60 * 24, // на сутки
+            Expires: 86400, // на сутки
+            ContentType: 'image/*',
+
         };
 
         const signedUrl = await s3.getSignedUrl('getObject', params);
