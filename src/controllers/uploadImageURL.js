@@ -13,6 +13,7 @@ exports.getUploadImageURL = async (req, res) => {
             Bucket: process.env.BUCKET_NAME || 'bucketdockerkryvoboktest',
             Key: `cards/test/${cardID}/${fileName}`,
             Expires: 86400, // на сутки
+            ACL: 'public-read',
         };
 
         const signedUrl = await s3.getSignedUrl('putObject', params);
