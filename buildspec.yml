@@ -9,7 +9,7 @@ phases:
       - NEW_TAG_CLEANED=$(echo $NEW_TAG | tr -cd '[:alnum:]')
       - echo Updating image tag to $NEW_TAG in ECR...
       - MANIFEST=$(aws ecr batch-get-image --repository-name $IMAGE_REPO_NAME --image-ids imageTag=latest --output text --query 'images[].imageManifest')
-      - aws ecr put-image --repository-name $IMAGE_REPO_NAME --image-tag $NEW_TAG --image-manifest "$MANIFEST"
+      - aws ecr put-image --repository-name $IMAGE_REPO_NAME --image-tag $NEW_TAG_CLEANED --image-manifest "$MANIFEST"
 
   build:
     commands:
