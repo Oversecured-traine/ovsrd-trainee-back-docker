@@ -10,8 +10,8 @@ phases:
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
       - echo Tagging existing "latest" image with timestamp...
       - TIMESTAMP=$(date +"%Y%m%d%H%M%S")
-      - OLD_TAG=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest
-      - NEW_TAG=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$TIMESTAMP
+      - OLD_TAG="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest"
+      - NEW_TAG="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$TIMESTAMP"
       - docker tag $OLD_TAG $NEW_TAG
       - docker push $NEW_TAG
       - echo Updating "latest" image tag...
