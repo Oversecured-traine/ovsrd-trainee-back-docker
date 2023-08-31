@@ -8,11 +8,17 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
-      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - echo Updating "latest" image tag in ECR...
+      - TIMESTAMP=$(date +"%Y%m%d%H%M%S")
+      - aws ecr batch-get-image --repository-name $IMAGE_REPO_NAME --image-ids imageTag=latest --output json | jq -r '.images[].imageDigest' | while read -r IMAGE; do
+          aws ecr batch-delete-image --repository-name $IMAGE_REPO_NAME --image-ids imageDigest=$IMAGE;
+          aws ecr put-image-tag-mutability --repository-name $IMAGE_REPO_NAME --image-tag-mutability IMMUTABLE;
+          aws ecr put-image-tag-mutability --repository-name $IMAGE_REPO_NAME --image-tag-mutability MUTABLE;
+        done
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest"
+      - docker push "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest"
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
       - echo Updating ECS service...
       - aws ecs update-service --cluster DockerECStest-Clustertest4C582AF6-55VC8GGsQE2Q --service DockerECStest-ServicetestServiceF60B2328-Ab4i5CUhQeEP --force-new-deployment
