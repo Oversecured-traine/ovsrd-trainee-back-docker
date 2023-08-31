@@ -13,6 +13,7 @@ exports.getUploadImageURL = async (req, res) => {
             Key: `cards/${cardID}/${fileName}`,
             Expires: 3600,
             ContentType: fileType,
+            ACL: 'public-read',
         };
 
         const signedUrl = await s3.getSignedUrl('putObject', params);
