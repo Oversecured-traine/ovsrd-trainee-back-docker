@@ -5,9 +5,10 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-      - echo Updating "latest" image tag in ECR...
+      - NEW_TAG="$IMAGE_REPO_NAME:$(date +%Y%m%d%H%M%S)"
+      - echo Updating image tag to $NEW_TAG in ECR...
       - MANIFEST=$(aws ecr batch-get-image --repository-name $IMAGE_REPO_NAME --image-ids imageTag=latest --output text --query 'images[].imageManifest')
-      - aws ecr put-image --repository-name $IMAGE_REPO_NAME --image-tag latest --image-manifest "$MANIFEST"
+      - aws ecr put-image --repository-name $IMAGE_REPO_NAME --image-tag $NEW_TAG --image-manifest "$MANIFEST"
 
   build:
     commands:
