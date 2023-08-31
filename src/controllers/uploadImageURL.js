@@ -2,8 +2,7 @@ const s3 = require('../common/S3');
 const logger = require('../utils/logger');
 
 exports.getUploadImageURL = async (req, res) => {
-    logger.info(req);
-
+    logger.info(req.body);
     try {
         const cardID = req.body.cardID;
         const fileName = req.body.fileName;
