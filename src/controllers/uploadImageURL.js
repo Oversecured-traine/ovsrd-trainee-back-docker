@@ -3,9 +3,10 @@ const logger = require('../utils/logger');
 
 exports.getUploadImageURL = async (req, res) => {
     logger.info(req.body);
+    logger.info(req.body.cardID);
+
     try {
         const cardID = req.body.cardID;
-        // const fileType = req.body.fileType;
 
         const params = {
             Bucket: process.env.BUCKET_NAME || 'bucketdockerkryvoboktest',

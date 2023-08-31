@@ -3,6 +3,8 @@ const logger = require('../utils/logger');
 
 exports.getSignedUrl = async (req, res) => {
     logger.info(req.body);
+    logger.info(req.body.cardID);
+
     try {
         const cardID = req.body.cardID;
 
