@@ -5,9 +5,9 @@ exports.getUploadImageURL = async (req, res) => {
     logger.info(req.body);
 
     try {
-        const cardID =  req.body.data.cardID;
-        const fileName = req.body.data.fileName;
-        const fileType = req.body.data.fileType;
+        const cardID =  req.body.cardID;
+        const fileName = req.body.fileName;
+        const fileType = req.body.fileType;
 
         const params = {
             Bucket: process.env.BUCKET_NAME || 'bucketdockerkryvoboktest',

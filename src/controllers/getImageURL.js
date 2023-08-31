@@ -5,8 +5,8 @@ exports.getSignedUrl = async (req, res) => {
     logger.info(req.body);
 
     try {
-        const cardID = req.body.data.cardID;
-        const fileName = req.body.data.fileName;
+        const cardID = req.body.cardID;
+        const fileName = req.body.fileName;
 
         const params = {
             Bucket: process.env.BUCKET_NAME || 'bucketdockerkryvoboktest',
