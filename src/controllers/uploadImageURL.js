@@ -5,14 +5,13 @@ exports.getUploadImageURL = async (req, res) => {
     logger.info(req.body);
     try {
         const cardID = req.body.cardID;
-        const fileName = req.body.fileName;
-        const fileType = req.body.fileType;
+        // const fileType = req.body.fileType;
 
         const params = {
             Bucket: process.env.BUCKET_NAME || 'bucketdockerkryvoboktest',
-            Key: `cards/${cardID}/${fileName}`,
+            Key: `cards/${cardID}`,
             Expires: 3600,
-            ContentType: fileType,
+            // ContentType: fileType,
             ACL: 'public-read',
         };
 
