@@ -6,14 +6,22 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - echo Build started on `date`
-      - echo Building the Docker image...          
+      - echo Building the Docker image...
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
-      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG      
+      - echo Tagging existing "latest" image with timestamp...
+      - TIMESTAMP=$(date +"%Y%m%d%H%M%S")
+      - OLD_TAG=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest
+      - NEW_TAG=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$TIMESTAMP
+      - docker tag $OLD_TAG $NEW_TAG
+      - docker push $NEW_TAG
+      - echo Updating "latest" image tag...
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $OLD_TAG
+      - docker push $OLD_TAG
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
       - echo Updating ECS service...
       - aws ecs update-service --cluster DockerECStest-Clustertest4C582AF6-55VC8GGsQE2Q --service DockerECStest-ServicetestServiceF60B2328-Ab4i5CUhQeEP --force-new-deployment
-#
+      - echo Removing old images...
+      - IMAGES=$(aws ecr list-images --repository-name $IMAGE_REPO_NAME --output json --query 'imageIds[?type(imageTag)!=`null`]|[?type(imageTag)==`string`].[imageDigest]' | sort -r | sed -n '4,$p')
+      - for IMAGE in $IMAGES; do aws ecr batch-delete-image --repository-name $IMAGE_REPO_NAME --image-ids imageDigest=$IMAGE; done
