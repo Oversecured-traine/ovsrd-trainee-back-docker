@@ -1,6 +1,8 @@
 const s3 = require('../common/S3');
+const logger = require('../utils/logger');
 
 exports.getUploadImageURL = async (req, res) => {
+    logger.info(req);
 
     try {
         const cardID = req.body.cardID;
@@ -19,7 +21,7 @@ exports.getUploadImageURL = async (req, res) => {
         res.json({ signedUrl });
     }
     catch(error) {
-        console.error('Error uploading file:', error);
+        logger.error('Error uploading file:', error);
         res.status(500).json({ error: 'Error uploading file' });
     }
 
