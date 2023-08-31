@@ -8,7 +8,7 @@ exports.getSignedUrl = async (req, res) => {
 
         const params = {
             Bucket: process.env.BUCKET_NAME || 'bucketdockerkryvoboktest',
-            Key: `cards/${cardID}`,
+            Key: `cards/test/${cardID}/`,
             Expires: 60 * 60 * 24, // на сутки
             ACL: 'public-read',
         };
