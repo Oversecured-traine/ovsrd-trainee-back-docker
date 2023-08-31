@@ -3,12 +3,6 @@ const logger = require('../utils/logger');
 
 exports.getUploadImageURL = async (req, res) => {
     logger.info(req.body);
-    logger.info(req.body.data);
-    logger.info(req.body.data.cardID);
-    logger.info(req.body.data.fileName);
-    logger.info(req.body.data.fileType);
-
-
 
     try {
         const cardID =  req.body.data.cardID;
