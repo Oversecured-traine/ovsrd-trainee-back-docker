@@ -19,3 +19,4 @@ phases:
       - echo Build completed on `date`
       - echo Updating ECS service...
       - aws ecs update-service --cluster DockerECStest-Clustertest4C582AF6-55VC8GGsQE2Q --service DockerECStest-ServicetestServiceF60B2328-Ab4i5CUhQeEP --force-new-deployment
+      #
