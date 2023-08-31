@@ -8,11 +8,14 @@ exports.getUploadImageURL = async (req, res) => {
     try {
         const cardID = req.body.cardID;
         const fileName = req.body.fileName;
+        const fileType = req.body.fileType;
 
         const params = {
             Bucket: process.env.BUCKET_NAME || 'bucketdockerkryvoboktest',
             Key: `cards/test/${cardID}/${fileName}`,
             Expires: 86400, // на сутки
+            ContentType: fileType,
+
         };
 
         const signedUrl = await s3.getSignedUrl('putObject', params);
