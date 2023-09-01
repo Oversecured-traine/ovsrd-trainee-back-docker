@@ -1,7 +1,7 @@
 const s3 = require('../common/S3');
 const logger = require('../utils/logger');
 
-exports.getSignedUrl = async (req, res) => {
+exports.deleteSignedUrl = async (req, res) => {
     logger.info(req.body);
 
     try {
@@ -13,7 +13,7 @@ exports.getSignedUrl = async (req, res) => {
             Expires: 86400, // на сутки
         };
 
-        const signedUrl = await s3.getSignedUrl('getObject', params);
+        const signedUrl = await s3.getSignedUrl('deleteObject', params);
 
         res.json({ signedUrl });
     } catch (error) {

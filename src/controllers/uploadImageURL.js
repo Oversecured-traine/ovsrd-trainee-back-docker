@@ -6,7 +6,6 @@ exports.getUploadImageURL = async (req, res) => {
 
     try {
         const cardID =  req.body.cardID;
-        // const fileName = req.body.fileName;
         const fileType = req.body.fileType;
 
         const params = {
