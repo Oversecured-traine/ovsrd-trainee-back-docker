@@ -24,4 +24,4 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Updating ECS service...
-      - aws ecs update-service --cluster $ECS_CLUSTER_NAME --service $ECS_SERVICE-NAME --force-new-deployment
+      - aws ecs update-service --cluster $ECS_CLUSTER_NAME --service $ECS_SERVICE_NAME --force-new-deployment
