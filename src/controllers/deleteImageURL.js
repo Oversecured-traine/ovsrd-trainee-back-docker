@@ -8,7 +8,7 @@ exports.deleteSignedUrl = async (req, res) => {
         const cardID = req.body.cardID;
 
         const params = {
-            Bucket: process.env.BUCKET_NAME || 'bucketdockerkryvoboktest',
+            Bucket: process.env.DOCKER_BUCKET_NAME,
             Key: `cards/${cardID}`,
             Expires: 86400, // на сутки
         };
