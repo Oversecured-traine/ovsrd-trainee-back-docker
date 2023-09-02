@@ -1,6 +1,6 @@
 FROM 666398651410.dkr.ecr.eu-west-1.amazonaws.com/ecrsource:latest
 
-ENV DOCKER_BUCKET_NAME=${DOCKER_BUCKET_NAME}
+ENV DOCKER_BUCKET_NAME ${DOCKER_BUCKET_NAME}
 
 WORKDIR /app
 
