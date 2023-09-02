@@ -6,6 +6,9 @@ WORKDIR /app
 
 COPY package*.json ./
 
+RUN echo "Environment variables:"
+RUN env
+
 RUN npm install
 
 COPY . .
