@@ -3,7 +3,8 @@ const logger = require('../utils/logger');
 
 exports.deleteSignedUrl = async (req, res) => {
     logger.info( req.body.cardID);
-    logger.info('process.env.DOCKER_BUCKET_NAME', process.env.DOCKER_BUCKET_NAME);
+    logger.info(process.env.DOCKER_BUCKET_NAME);
+
 
     try {
         const cardID = req.body.cardID;

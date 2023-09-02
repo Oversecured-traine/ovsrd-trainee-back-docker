@@ -7,7 +7,7 @@ exports.getUploadImageURL = async (req, res) => {
     try {
         const cardID =  req.body.cardID;
         const fileType = req.body.fileType;
-        logger.info('process.env.DOCKER_BUCKET_NAME', process.env.DOCKER_BUCKET_NAME);
+        logger.info(process.env.DOCKER_BUCKET_NAME);
 
 
         const params = {
