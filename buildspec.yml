@@ -5,11 +5,11 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-      - NEW_TAG="$IMAGE_REPO_NAME:$(date +'%Y%m%d%H%M%S')"
-      - NEW_TAG_CLEANED=$(echo $NEW_TAG | tr -cd '[:alnum:]')
-      - echo Updating image tag to $NEW_TAG in ECR...
-      - MANIFEST=$(aws ecr batch-get-image --repository-name $IMAGE_REPO_NAME --image-ids imageTag=latest --output text --query 'images[].imageManifest')
-      - aws ecr put-image --repository-name $IMAGE_REPO_NAME --image-tag $NEW_TAG_CLEANED --image-manifest "$MANIFEST"
+#      - NEW_TAG="$IMAGE_REPO_NAME:$(date +'%Y%m%d%H%M%S')"
+#      - NEW_TAG_CLEANED=$(echo $NEW_TAG | tr -cd '[:alnum:]')
+#      - echo Updating image tag to $NEW_TAG in ECR...
+#      - MANIFEST=$(aws ecr batch-get-image --repository-name $IMAGE_REPO_NAME --image-ids imageTag=latest --output text --query 'images[].imageManifest')
+#      - aws ecr put-image --repository-name $IMAGE_REPO_NAME --image-tag $NEW_TAG_CLEANED --image-manifest "$MANIFEST"
 
   build:
     commands:
