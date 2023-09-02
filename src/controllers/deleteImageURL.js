@@ -2,7 +2,7 @@ const s3 = require('../common/S3');
 const logger = require('../utils/logger');
 
 exports.deleteSignedUrl = async (req, res) => {
-    logger.info(req.body);
+    logger.info( req.body.cardID);
     logger.info('process.env.DOCKER_BUCKET_NAME', process.env.DOCKER_BUCKET_NAME);
 
     try {
