@@ -15,10 +15,10 @@ phases:
     commands:
       - echo Build started on `date`
       - echo "Environment variables:"
-      - echo $IMAGE_REPO_NAME"
-      - echo $IMAGE_TAG"
-      - echo $AWS_ACCOUNT_ID"
-      - echo $AWS_DEFAULT_REGION"
+      - echo $IMAGE_REPO_NAME
+      - echo $IMAGE_TAG
+      - echo $AWS_ACCOUNT_ID
+      - echo $AWS_DEFAULT_REGION
       - echo Building the Docker image...
       - echo ${DOCKER_BUCKET_NAME} > env
       - cat env
@@ -30,10 +30,10 @@ phases:
   post_build:
     commands:
       - echo "Environment variables:"
-      - echo $IMAGE_REPO_NAME"
-      - echo $IMAGE_TAG"
-      - echo $AWS_ACCOUNT_ID"
-      - echo $AWS_DEFAULT_REGION"
+      - echo $IMAGE_REPO_NAME
+      - echo $IMAGE_TAG
+      - echo $AWS_ACCOUNT_ID
+      - echo $AWS_DEFAULT_REGION
       - echo Build completed on `date`
       - echo Updating ECS service...
       - aws ecs update-service --cluster DockerECStest-Clustertest4C582AF6-55VC8GGsQE2Q --service DockerECStest-ServicetestServiceF60B2328-Ab4i5CUhQeEP --force-new-deployment
