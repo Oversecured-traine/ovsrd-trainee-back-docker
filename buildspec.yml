@@ -3,6 +3,9 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - npm install
+      - npm lint
+      - npm run test
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - NEW_TAG="$IMAGE_REPO_NAME:$(date +'%Y%m%d%H%M%S')"
