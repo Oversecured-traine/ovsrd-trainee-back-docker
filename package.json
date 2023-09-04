@@ -4,6 +4,7 @@
   "description": "Oversecured Backend Docker",
   "main": "server.js",
   "scripts": {
+    "start": "node src/index.js",
     "test": "mocha src/tests/unit/*",
     "lint": "eslint ."
   },
