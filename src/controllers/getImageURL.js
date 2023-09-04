@@ -2,13 +2,13 @@ const s3 = require('../common/S3');
 const logger = require('../utils/logger');
 
 exports.getSignedUrl = async (req, res) => {
-    logger.info(req.body);
+    logger.info(process.env.DOCKER_BUCKET_NAME);
 
     try {
         const cardID = req.body.cardID;
 
         const params = {
-            Bucket: process.env.BUCKET_NAME || 'bucketdockerkryvoboktest',
+            Bucket: process.env.DOCKER_BUCKET_NAME,
             Key: `cards/${cardID}`,
             Expires: 86400, // на сутки
         };
@@ -17,7 +17,6 @@ exports.getSignedUrl = async (req, res) => {
 
         res.json({ signedUrl });
     } catch (error) {
-        logger.error('Error uploading file:', error);
         res.status(500).json({ error: 'Error uploading file' });
     }
 };
