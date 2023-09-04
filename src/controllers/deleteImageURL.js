@@ -19,7 +19,6 @@ exports.deleteSignedUrl = async (req, res) => {
 
         res.json({ signedUrl });
     } catch (error) {
-        logger.error('Error deleting file:', error);
         res.status(500).json({ error: 'Error deleting file' });
     }
 };
